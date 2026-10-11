@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/fetch-live-data.mjs",
+    "prebuild": "node scripts/fetch-live-data.mjs && node scripts/certificate-thumbs.mjs",
     "build": "next build",
     "postbuild": "node scripts/postbuild.mjs",
     "start": "npx --yes serve@14 out",

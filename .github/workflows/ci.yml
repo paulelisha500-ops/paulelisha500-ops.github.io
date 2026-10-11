@@ -33,7 +33,7 @@ jobs:
       - name: Check the export
         run: |
           for f in index.html 404.html about/index.html projects/index.html projects/skinsense/index.html \
-                   shipped/index.html photos/index.html sw.js manifest.webmanifest sitemap.xml .nojekyll README.md; do
+                   shipped/index.html photos/index.html certificates/index.html sw.js manifest.webmanifest sitemap.xml .nojekyll README.md; do
             test -f "out/$f" || { echo "::error::missing out/$f"; exit 1; }
           done
           if grep -q "__BUILD_ID__" out/sw.js; then echo "::error::service worker was not stamped"; exit 1; fi

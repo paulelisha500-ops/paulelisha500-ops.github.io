@@ -50,7 +50,7 @@ export const projects: Project[] = [
     hook: "AI skin screening, routines and progress tracking.",
     lead: "Take one photo and a fine-tuned EfficientNet-B0 screens it across seven skin conditions, then builds a routine around it.",
     description:
-      "Final-year team project (3 members), live on Hugging Face Spaces. The model returns every class's confidence, not just the top one, and marks anything under 40% as unclear instead of guessing. Severe results escalate to a dermatologist; normal skin never does.",
+      "Final-year team project (3 members). The website is on GitHub Pages and the AI scanner runs on Hugging Face Spaces. The model returns every class's confidence, not just the top one, and marks anything under 40% as unclear instead of guessing. Severe results escalate to a dermatologist; normal skin never does.",
     highlights: [
       "Fine-tuned EfficientNet-B0 across acne, dry skin, eczema, hyperpigmentation, normal, oily and rosacea",
       "Morning and evening routines built from a catalogue of 34 products",
@@ -67,7 +67,11 @@ export const projects: Project[] = [
       { label: "Products", value: "34" },
       { label: "Plan", value: "30 days" },
     ],
-    links: [gh("skinsense"), space("skinsense")],
+    links: [
+      gh("skinsense"),
+      { label: "Website", href: "https://paulelisha500-ops.github.io/skinsense/", kind: "pages" },
+      { label: "Open the app", href: "https://huggingface.co/spaces/Elisha622/skinsense", kind: "huggingface" },
+    ],
   },
   {
     slug: "medverse-ai",

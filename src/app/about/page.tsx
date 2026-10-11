@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
-import { Brain, Briefcase, Cloud, Code2, Globe, GraduationCap, Languages, Sparkles, type LucideIcon } from "lucide-react";
+import Link from "next/link";
+import {
+  ArrowRight,
+  Award,
+  Brain,
+  Briefcase,
+  Cloud,
+  Code2,
+  Globe,
+  GraduationCap,
+  Languages,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import { BrandIcon } from "@/components/icons";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { Marquee } from "@/components/magicui/marquee";
@@ -10,8 +23,9 @@ import { StackPile } from "@/components/sections/stack-pile";
 import { aboutPhotos } from "@/data/photos";
 import { profile, socials } from "@/data/profile";
 import { skillGroups, stackBadges, type SkillGroup } from "@/data/skills";
+import { getCertificates } from "@/lib/certificates";
 import { live } from "@/lib/live";
-import { splitBold } from "@/lib/utils";
+import { formatMonth, splitBold } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "About",
@@ -53,6 +67,7 @@ function Row({ icon: Icon, title, meta, children }: { icon: LucideIcon; title: s
 }
 
 export default function AboutPage() {
+  const certificates = getCertificates();
   const handles: Record<string, string> = {
     kaggle: live.kaggle.tier ? `${live.kaggle.tier[0]}${live.kaggle.tier.slice(1).toLowerCase()} tier` : "",
     huggingface: `${live.huggingface.spaces.length} Spaces · ${live.huggingface.models.length} models`,
@@ -142,6 +157,34 @@ export default function AboutPage() {
           {profile.education.map((e) => (
             <Row key={e.school} icon={GraduationCap} title={e.school} meta={`${e.degree} · ${e.period}`} />
           ))}
+        </Block>
+
+        <Block title="Certificates">
+          <div className="space-y-3">
+            {certificates.length === 0 ? (
+              <Link href="/certificates/" className="block transition-opacity hover:opacity-80">
+                <Row icon={Award} title="Certificates coming soon" meta="Courses and credentials in AI and machine learning" />
+              </Link>
+            ) : (
+              certificates.slice(0, 4).map((c) => (
+                <Link key={c.slug} href="/certificates/" className="block transition-opacity hover:opacity-80">
+                  <Row
+                    icon={Award}
+                    title={c.title}
+                    meta={[c.issuer, c.date && formatMonth(c.date)].filter(Boolean).join(" · ") || "Certificate"}
+                  />
+                </Link>
+              ))
+            )}
+            {certificates.length > 4 && (
+              <Link
+                href="/certificates/"
+                className="inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-medium transition-colors hover:bg-surface-strong"
+              >
+                All {certificates.length} certificates <ArrowRight className="size-4" strokeWidth={2} />
+              </Link>
+            )}
+          </div>
         </Block>
 
         <Block title="Languages">
