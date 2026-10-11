@@ -27,7 +27,6 @@ export const profile = {
     { name: "Tamil", level: "Native" },
     { name: "English", level: "Fluent" },
     { name: "Arabic", level: "Basic" },
-    { name: "Japanese", level: "Basic" },
   ],
   experience: [
     {
