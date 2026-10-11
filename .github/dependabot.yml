@@ -8,6 +8,16 @@ updates:
     groups:
       all:
         patterns: ["*"]
+    # Next.js 16's lint plugins support ESLint up to 9, and its tooling targets
+    # TypeScript 5, so major jumps of these break the build. Minor and patch
+    # updates still come through; revisit when Next.js supports the new majors.
+    ignore:
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
