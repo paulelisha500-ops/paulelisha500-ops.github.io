@@ -67,11 +67,7 @@ export const projects: Project[] = [
       { label: "Products", value: "34" },
       { label: "Plan", value: "30 days" },
     ],
-    links: [
-      gh("skinsense"),
-      { label: "Website", href: "https://paulelisha500-ops.github.io/skinsense/", kind: "pages" },
-      { label: "Open the app", href: "https://huggingface.co/spaces/Elisha622/skinsense", kind: "huggingface" },
-    ],
+    links: [gh("skinsense"), space("skinsense"), pages("skinsense")],
   },
   {
     slug: "medverse-ai",
