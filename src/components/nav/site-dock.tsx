@@ -5,17 +5,18 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Award, GitPullRequestArrow, House, Images, LayoutGrid, type LucideIcon } from "lucide-react";
-import { Dock, DockIcon, DockSeparator } from "@/components/magicui/dock";
+import { Dock, DockIcon } from "@/components/magicui/dock";
 import { normalizePath } from "@/components/static-host-urls";
 import { profile } from "@/data/profile";
 import { cn } from "@/lib/utils";
 
 type Item = { href: string; label: string; Icon?: LucideIcon };
 
+// Home sits in the middle: Projects and About to its left, the rest to its right.
 const items: Item[] = [
-  { href: "/", label: "Home", Icon: House },
   { href: "/projects/", label: "Projects", Icon: LayoutGrid },
   { href: "/about/", label: "About" },
+  { href: "/", label: "Home", Icon: House },
   { href: "/certificates/", label: "Certificates", Icon: Award },
   { href: "/shipped/", label: "Shipped", Icon: GitPullRequestArrow },
   { href: "/photos/", label: "Photos", Icon: Images },
@@ -44,7 +45,8 @@ function Avatar({ className }: { className?: string }) {
 export function SiteDock() {
   const pathname = usePathname();
   const [compact, setCompact] = useState(false);
-  const current = items.find((i) => isActive(pathname, i.href)) ?? items[0];
+  const home = items.find((i) => i.href === "/")!;
+  const current = items.find((i) => isActive(pathname, i.href)) ?? home;
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -90,36 +92,33 @@ export function SiteDock() {
             className="pointer-events-auto"
           >
             <Dock>
-              {items.map((item, i) => {
+              {items.map((item) => {
                 const active = isActive(pathname, item.href);
                 return (
-                  <div key={item.href} className="contents">
-                    {i === 4 && <DockSeparator />}
-                    <DockIcon className="group">
-                      <Link
-                        href={item.href}
-                        aria-label={item.label}
-                        aria-current={active ? "page" : undefined}
-                        className={cn(
-                          "grid size-full place-items-center rounded-full transition-colors",
-                          item.Icon && "hover:bg-surface-strong",
-                          active && item.Icon && "bg-surface-strong",
-                        )}
-                      >
-                        {item.Icon ? <item.Icon className="size-[46%]" strokeWidth={1.9} /> : <Avatar />}
-                      </Link>
-                      <span
-                        aria-hidden
-                        className={cn(
-                          "absolute -bottom-[7px] size-1 rounded-full bg-fg transition-opacity",
-                          active ? "opacity-70" : "opacity-0",
-                        )}
-                      />
-                      <span className="glass pointer-events-none absolute -top-10 rounded-lg px-2.5 py-1 text-xs font-medium whitespace-nowrap opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100">
-                        {item.label}
-                      </span>
-                    </DockIcon>
-                  </div>
+                  <DockIcon key={item.href} className="group">
+                    <Link
+                      href={item.href}
+                      aria-label={item.label}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "grid size-full place-items-center rounded-full transition-colors",
+                        item.Icon && "hover:bg-surface-strong",
+                        active && item.Icon && "bg-surface-strong",
+                      )}
+                    >
+                      {item.Icon ? <item.Icon className="size-[46%]" strokeWidth={1.9} /> : <Avatar />}
+                    </Link>
+                    <span
+                      aria-hidden
+                      className={cn(
+                        "absolute -bottom-[7px] size-1 rounded-full bg-fg transition-opacity",
+                        active ? "opacity-70" : "opacity-0",
+                      )}
+                    />
+                    <span className="glass pointer-events-none absolute -top-10 rounded-lg px-2.5 py-1 text-xs font-medium whitespace-nowrap opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100">
+                      {item.label}
+                    </span>
+                  </DockIcon>
                 );
               })}
             </Dock>
