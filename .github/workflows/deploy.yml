@@ -1,0 +1,93 @@
+# Builds main once and publishes that same build to both hosts:
+#   - GitHub Pages             https://paulelisha500-ops.github.io
+#   - Hugging Face Space       https://huggingface.co/spaces/Elisha622/portfolio
+# It also runs daily, so contribution, PR, Hugging Face and Docker stats stay fresh.
+# The Space step needs one repository secret, HF_TOKEN (write access); without it
+# that step is skipped with a warning and Pages still deploys.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+      - uses: actions/upload-artifact@v7
+        with:
+          name: site
+          path: out
+          include-hidden-files: true
+          retention-days: 7
+
+  pages:
+    name: Publish to GitHub Pages
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
+
+  space:
+    name: Publish to the Hugging Face Space
+    needs: build
+    runs-on: ubuntu-24.04
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      SPACE: Elisha622/portfolio
+    steps:
+      - name: Check for the Hugging Face token
+        id: token
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "::warning::HF_TOKEN is not set, so the Space was not updated. Add it under Settings > Secrets and variables > Actions."
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v7
+        if: steps.token.outputs.present == 'true'
+      - uses: actions/download-artifact@v8
+        if: steps.token.outputs.present == 'true'
+        with:
+          name: site
+          path: site
+      - uses: actions/setup-python@v7
+        if: steps.token.outputs.present == 'true'
+        with:
+          python-version: "3.12"
+      - name: Upload the build to the Space
+        if: steps.token.outputs.present == 'true'
+        run: |
+          pip install --quiet "huggingface_hub>=1.0"
+          python scripts/deploy_hf_space.py site
