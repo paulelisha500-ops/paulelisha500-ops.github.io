@@ -1,0 +1,46 @@
+# Checks every pull request: lint, types, and a full static build.
+# The build output is kept as an artifact so a PR can be previewed locally.
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Lint, typecheck and build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run lint
+      - run: npm run typecheck
+      - name: Build (fetches live GitHub, Hugging Face, Docker Hub and Kaggle stats)
+        run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check the export
+        run: |
+          for f in index.html 404.html about/index.html projects/index.html projects/skinsense/index.html \
+                   shipped/index.html photos/index.html sw.js manifest.webmanifest sitemap.xml .nojekyll README.md; do
+            test -f "out/$f" || { echo "::error::missing out/$f"; exit 1; }
+          done
+          if grep -q "__BUILD_ID__" out/sw.js; then echo "::error::service worker was not stamped"; exit 1; fi
+          echo "Export size: $(du -sh out | cut -f1)"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: site
+          path: out
+          include-hidden-files: true
+          retention-days: 7
