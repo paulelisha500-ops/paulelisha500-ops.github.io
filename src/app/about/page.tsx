@@ -188,7 +188,7 @@ export default function AboutPage() {
         </Block>
 
         <Block title="Languages">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {profile.languages.map((l) => (
               <div key={l.name} className="card flex items-center gap-3 p-4">
                 <Languages className="size-4 text-muted" strokeWidth={1.8} />
