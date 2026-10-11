@@ -7,7 +7,7 @@ const CACHE = `ep-${VERSION}`;
 // Hugging Face static Spaces only serve the explicit index.html form of a page.
 const INDEX = self.location.hostname.endsWith(".hf.space") ? "index.html" : "";
 const HOME = `/${INDEX}`;
-const SHELL = ["/", "/projects/", "/about/", "/shipped/", "/photos/"]
+const SHELL = ["/", "/projects/", "/about/", "/certificates/", "/shipped/", "/photos/"]
   .map((p) => p + INDEX)
   .concat(["/manifest.webmanifest", "/icon.svg"]);
 

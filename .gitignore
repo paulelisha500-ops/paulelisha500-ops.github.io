@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# generated certificate previews (scripts/certificate-thumbs.mjs)
+/public/media/certificates/thumbs/
+
 # production
 /build
 

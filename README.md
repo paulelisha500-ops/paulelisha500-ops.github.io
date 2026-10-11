@@ -18,7 +18,8 @@ Apple-inspired, mostly monochrome design.
 |---|---|
 | **Home** | Hero with a swipeable photo stack, GitHub contribution graph, project shelf with detail sheets, the Kaggle → GitHub → Hugging Face → Docker pipeline, recent merged PRs, and a physics "stack" pile |
 | **Projects** | Every project, each with a case-study page (overview, highlights, stack, merged PRs) |
-| **About** | Bio, experience, skills, education, languages and every profile link |
+| **About** | Bio, experience, skills, education, certificates, languages and every profile link |
+| **Certificates** | Your certificates, filled automatically from uploaded files, with a full-screen viewer and verify links |
 | **Shipped** | A changelog of merged pull requests, refreshed on every deploy |
 | **Photos** | Gallery (blank frames until photos are added) |
 
@@ -49,8 +50,20 @@ also runs daily to keep the numbers current.
 | Projects | [`src/data/projects.ts`](src/data/projects.ts) |
 | Skills and stack badges | [`src/data/skills.ts`](src/data/skills.ts) |
 | Photos | Put files in `public/media/` and set `src` in [`src/data/photos.ts`](src/data/photos.ts) |
+| Certificates | Upload to [`public/media/certificates/`](public/media/certificates); details (optional) in [`src/data/certificates.ts`](src/data/certificates.ts) |
 | Resume button | Add `public/resume.pdf` and set `resumeUrl: "/resume.pdf"` in `profile.ts` |
 | Logo / app icons | Edit `public/icon.svg`, then `npm run icons` |
+
+## Adding certificates
+
+1. On GitHub, open [`public/media/certificates`](public/media/certificates) → **Add file** → **Upload files**.
+2. Drop in an image (PNG, JPG, WebP) and/or a PDF per certificate, named after it, e.g. `aws-machine-learning.png`.
+   An image and PDF with the same name become one certificate.
+3. **Commit changes**. The deploy runs and the certificate appears on the site in a few minutes.
+
+The title comes from the file name. To add the issuer, date, credential ID, a verification link or skills, add an
+entry keyed by the file name in [`src/data/certificates.ts`](src/data/certificates.ts). Previews are resized to WebP
+automatically at build time, so large scans don't slow the page down.
 
 ## CI/CD
 

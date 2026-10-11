@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { GitPullRequestArrow, House, Images, LayoutGrid, type LucideIcon } from "lucide-react";
+import { Award, GitPullRequestArrow, House, Images, LayoutGrid, type LucideIcon } from "lucide-react";
 import { Dock, DockIcon, DockSeparator } from "@/components/magicui/dock";
 import { normalizePath } from "@/components/static-host-urls";
 import { profile } from "@/data/profile";
@@ -16,6 +16,7 @@ const items: Item[] = [
   { href: "/", label: "Home", Icon: House },
   { href: "/projects/", label: "Projects", Icon: LayoutGrid },
   { href: "/about/", label: "About" },
+  { href: "/certificates/", label: "Certificates", Icon: Award },
   { href: "/shipped/", label: "Shipped", Icon: GitPullRequestArrow },
   { href: "/photos/", label: "Photos", Icon: Images },
 ];
@@ -93,7 +94,7 @@ export function SiteDock() {
                 const active = isActive(pathname, item.href);
                 return (
                   <div key={item.href} className="contents">
-                    {i === 3 && <DockSeparator />}
+                    {i === 4 && <DockSeparator />}
                     <DockIcon className="group">
                       <Link
                         href={item.href}
