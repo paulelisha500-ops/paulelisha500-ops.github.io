@@ -34,7 +34,7 @@ export function applySettings(s: Settings) {
   const theme = resolvedTheme(s.theme);
   root.dataset.theme = theme;
   root.dataset.ambient = s.ambient ? "on" : "off";
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#000000" : "#fbfbfd");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#05070c" : "#f7f8fb");
 }
 
 export function updateSettings(patch: Partial<Settings>) {

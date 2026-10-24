@@ -1,26 +1,16 @@
-// Photos are intentionally blank for now. To add one, put the file in
-// public/media/ and set `src`, e.g. { src: "/media/hero-1.jpg", alt: "..." }.
-// Empty entries render as clean placeholder frames.
+// To add a photo, put the file in public/media/ and add it to a list below,
+// e.g. { src: "/media/graduation.jpg", alt: "..." }. With two or more photos
+// the hero becomes a swipeable stack.
 
 export type Photo = { src: string; alt: string };
 
-const blank = (alt: string): Photo => ({ src: "", alt });
+const portrait: Photo = { src: "/media/elisha-paul.jpg", alt: "Elisha Paul in a light blue blazer" };
 
 /** The swipeable stack in the hero. */
-export const heroPhotos: Photo[] = Array.from({ length: 7 }, (_, i) => blank(`Portrait ${i + 1}`));
+export const heroPhotos: Photo[] = [portrait];
 
-/** The tilted strip at the top of the About page. */
-export const aboutPhotos: Photo[] = Array.from({ length: 8 }, (_, i) => blank(`Moment ${i + 1}`));
+/** The tilted cards at the top of the About page. */
+export const aboutPhotos: Photo[] = [portrait];
 
 /** The Photos page grid. */
-export const galleryPhotos: (Photo & { caption: string; tall?: boolean })[] = [
-  { ...blank("Gallery 1"), caption: "Add a caption", tall: true },
-  { ...blank("Gallery 2"), caption: "Add a caption" },
-  { ...blank("Gallery 3"), caption: "Add a caption" },
-  { ...blank("Gallery 4"), caption: "Add a caption", tall: true },
-  { ...blank("Gallery 5"), caption: "Add a caption" },
-  { ...blank("Gallery 6"), caption: "Add a caption", tall: true },
-  { ...blank("Gallery 7"), caption: "Add a caption" },
-  { ...blank("Gallery 8"), caption: "Add a caption" },
-  { ...blank("Gallery 9"), caption: "Add a caption", tall: true },
-];
+export const galleryPhotos: (Photo & { caption?: string; tall?: boolean })[] = [{ ...portrait, tall: true }];

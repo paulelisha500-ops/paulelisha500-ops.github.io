@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { BrandIcon } from "@/components/icons";
 import { BlurFade } from "@/components/magicui/blur-fade";
-import { Marquee } from "@/components/magicui/marquee";
 import { PhotoFrame } from "@/components/photo-frame";
 import { Container } from "@/components/section-heading";
 import { Connect } from "@/components/sections/connect";
@@ -77,20 +76,16 @@ export default function AboutPage() {
 
   return (
     <>
-      {/* Photo strip */}
-      <div className="relative pt-20">
-        <Marquee pauseOnHover className="py-6 [--duration:60s] [--gap:1.25rem]">
-          {aboutPhotos.map((photo, i) => (
-            <div
-              key={i}
-              className={`aspect-[4/5] w-36 rounded-[22px] border border-line bg-elevated p-1.5 shadow-xl shadow-black/20 sm:w-44 ${tilts[i % tilts.length]}`}
-            >
-              <PhotoFrame photo={photo} className="size-full rounded-[17px]" eager={i < 4} />
-            </div>
-          ))}
-        </Marquee>
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-bg sm:w-32" />
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bg sm:w-32" />
+      {/* Photos */}
+      <div className="flex flex-wrap justify-center gap-5 px-4 pt-24 pb-6">
+        {aboutPhotos.map((photo, i) => (
+          <div
+            key={i}
+            className={`aspect-[4/5] w-44 rounded-[22px] border border-line bg-elevated p-1.5 shadow-xl shadow-black/20 sm:w-52 ${tilts[i % tilts.length]}`}
+          >
+            <PhotoFrame photo={photo} className="size-full rounded-[17px]" eager={i < 4} />
+          </div>
+        ))}
       </div>
 
       <Container className="max-w-3xl">
