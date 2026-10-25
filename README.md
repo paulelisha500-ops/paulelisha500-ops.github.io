@@ -21,7 +21,7 @@ Apple-inspired, mostly monochrome design.
 | **About** | Bio, experience, skills, education, certificates, languages and every profile link |
 | **Certificates** | Your certificates, filled automatically from uploaded files, with a full-screen viewer and verify links |
 | **Shipped** | A changelog of merged pull requests, refreshed on every deploy |
-| **Photos** | Gallery (blank frames until photos are added) |
+| **Photos** | Photo gallery |
 
 The loading screen is a separate component ([`src/components/splash`](src/components/splash)) that draws one of
 six logo marks at random on each visit, never the same one twice in a row.

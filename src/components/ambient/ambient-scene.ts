@@ -61,8 +61,9 @@ const fragmentShader = /* glsl */ `
 `;
 
 const palettes = {
-  dark: { colors: ["#3b4fd8", "#1f8f86", "#7a4fd1", "#c27a2c"], intensity: 0.26 },
-  light: { colors: ["#9fb0ff", "#8fdcd2", "#c9b5ff", "#ffcf8f"], intensity: 0.34 },
+  // Taken from the portrait: royal-blue drapes, light-blue blazer, its shadow, and the warm ivory shirt.
+  dark: { colors: ["#3f5fd6", "#6f9ad8", "#4a5f9e", "#e8d6c8"], intensity: 0.26 },
+  light: { colors: ["#a9bdf2", "#bcd3f2", "#c4cbe0", "#f1e3d8"], intensity: 0.34 },
 } as const;
 
 export type AmbientHandle = { dispose: () => void };

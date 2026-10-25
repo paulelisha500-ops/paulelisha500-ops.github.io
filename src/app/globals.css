@@ -2,45 +2,46 @@
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* Apple-style neutral palette. Colour lives in a few places only: the ambient
-   background, the contribution graph and the stack badges. */
+/* Apple-style, mostly neutral palette tinted to match the portrait: royal-blue
+   drapes (#5c7aec), light-blue blazer (#87ade5) and silvery satin. Colour lives
+   in a few places only: the ambient light, the contribution graph and the badges. */
 :root {
-  --bg: #fbfbfd;
+  --bg: #f7f8fb;
   --bg-elevated: #ffffff;
-  --surface: rgb(0 0 0 / 0.028);
-  --surface-strong: rgb(0 0 0 / 0.055);
-  --line: rgb(0 0 0 / 0.08);
-  --line-strong: rgb(0 0 0 / 0.14);
+  --surface: rgb(20 30 60 / 0.028);
+  --surface-strong: rgb(20 30 60 / 0.055);
+  --line: rgb(20 30 60 / 0.08);
+  --line-strong: rgb(20 30 60 / 0.14);
   --fg: #1d1d1f;
   --muted: #6e6e73;
   --subtle: #a1a1a6;
-  --accent: #0071e3;
-  --heat-0: rgb(0 0 0 / 0.06);
-  --heat-1: #9be9a8;
-  --heat-2: #40c463;
-  --heat-3: #30a14e;
-  --heat-4: #216e39;
-  --spot: rgb(0 0 0 / 0.04);
+  --accent: #3f5fd6;
+  --heat-0: rgb(20 30 60 / 0.06);
+  --heat-1: #c9d8f7;
+  --heat-2: #9ab4ee;
+  --heat-3: #6f8fe4;
+  --heat-4: #4a66c9;
+  --spot: rgb(92 122 236 / 0.07);
   color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --bg: #000000;
-  --bg-elevated: #0d0d0f;
-  --surface: rgb(255 255 255 / 0.035);
-  --surface-strong: rgb(255 255 255 / 0.07);
-  --line: rgb(255 255 255 / 0.08);
-  --line-strong: rgb(255 255 255 / 0.15);
+  --bg: #05070c;
+  --bg-elevated: #0d111a;
+  --surface: rgb(200 215 255 / 0.035);
+  --surface-strong: rgb(200 215 255 / 0.07);
+  --line: rgb(200 215 255 / 0.08);
+  --line-strong: rgb(200 215 255 / 0.15);
   --fg: #f5f5f7;
   --muted: #a1a1a6;
   --subtle: #6e6e73;
-  --accent: #2997ff;
-  --heat-0: rgb(255 255 255 / 0.06);
-  --heat-1: #0e4429;
-  --heat-2: #006d32;
-  --heat-3: #26a641;
-  --heat-4: #39d353;
-  --spot: rgb(255 255 255 / 0.07);
+  --accent: #87ade5;
+  --heat-0: rgb(200 215 255 / 0.06);
+  --heat-1: #17244a;
+  --heat-2: #2a3f86;
+  --heat-3: #4a68d0;
+  --heat-4: #87ade5;
+  --spot: rgb(135 173 229 / 0.09);
   color-scheme: dark;
 }
 

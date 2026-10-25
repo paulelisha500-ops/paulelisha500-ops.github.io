@@ -13,6 +13,7 @@ const tilt = [-2, 5, -6, 3];
 export function PhotoStack({ photos }: { photos: Photo[] }) {
   const [order, setOrder] = useState(() => photos.map((_, i) => i));
   const [exitDir, setExitDir] = useState(1);
+  const many = photos.length > 1;
 
   const advance = (dir: number) => {
     setExitDir(dir);
@@ -27,10 +28,10 @@ export function PhotoStack({ photos }: { photos: Photo[] }) {
     <div className="flex flex-col items-center gap-4">
       <div
         className="relative aspect-[4/5] w-[min(78vw,300px)] sm:w-[320px]"
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Photos"
-        tabIndex={0}
+        role={many ? "region" : undefined}
+        aria-roledescription={many ? "carousel" : undefined}
+        aria-label={many ? "Photos" : undefined}
+        tabIndex={many ? 0 : undefined}
         onKeyDown={(e) => {
           if (e.key === "ArrowRight") advance(1);
           if (e.key === "ArrowLeft") advance(-1);
@@ -43,18 +44,18 @@ export function PhotoStack({ photos }: { photos: Photo[] }) {
               custom={exitDir}
               className={cn(
                 "absolute inset-0 rounded-[28px] border border-line bg-elevated p-2 shadow-2xl shadow-black/25",
-                pos === 0 ? "cursor-grab touch-pan-y active:cursor-grabbing" : "pointer-events-none",
+                pos === 0 && many ? "cursor-grab touch-pan-y active:cursor-grabbing" : pos > 0 && "pointer-events-none",
               )}
               style={{ zIndex: VISIBLE - pos }}
               initial={{ scale: 0.86, y: 30, opacity: 0, rotate: tilt[VISIBLE - 1] }}
               animate={{ scale: 1 - pos * 0.045, y: pos * -12, opacity: 1, rotate: tilt[pos], x: 0 }}
               exit={{ x: exitDir * 420, rotate: exitDir * 18, opacity: 0, transition: { duration: 0.35 } }}
               transition={{ type: "spring", stiffness: 260, damping: 26 }}
-              drag={pos === 0 ? "x" : false}
+              drag={pos === 0 && many ? "x" : false}
               dragSnapToOrigin
               dragElastic={0.6}
               onDragEnd={pos === 0 ? onDragEnd : undefined}
-              onTap={pos === 0 ? () => advance(1) : undefined}
+              onTap={pos === 0 && many ? () => advance(1) : undefined}
             >
               <PhotoFrame photo={photos[idx]} className="size-full rounded-[20px]" eager={pos === 0} />
             </motion.div>
@@ -62,18 +63,22 @@ export function PhotoStack({ photos }: { photos: Photo[] }) {
         </AnimatePresence>
       </div>
 
-      <div className="flex items-center gap-1.5" aria-hidden>
-        {photos.map((_, i) => (
-          <span
-            key={i}
-            className={cn(
-              "h-1.5 rounded-full bg-fg transition-all duration-300",
-              order[0] === i ? "w-4 opacity-80" : "w-1.5 opacity-20",
-            )}
-          />
-        ))}
-      </div>
-      <p className="text-xs text-subtle">Tap or swipe for more</p>
+      {many && (
+        <>
+          <div className="flex items-center gap-1.5" aria-hidden>
+            {photos.map((_, i) => (
+              <span
+                key={i}
+                className={cn(
+                  "h-1.5 rounded-full bg-fg transition-all duration-300",
+                  order[0] === i ? "w-4 opacity-80" : "w-1.5 opacity-20",
+                )}
+              />
+            ))}
+          </div>
+          <p className="text-xs text-subtle">Tap or swipe for more</p>
+        </>
+      )}
     </div>
   );
 }
