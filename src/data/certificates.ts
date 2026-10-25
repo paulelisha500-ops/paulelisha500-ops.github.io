@@ -19,13 +19,32 @@ export type CertificateDetails = {
 };
 
 export const certificateDetails: Record<string, CertificateDetails> = {
-  // "aws-machine-learning": {
-  //   title: "AWS Certified Machine Learning – Specialty",
-  //   issuer: "Amazon Web Services",
-  //   date: "2026-05",
-  //   credentialUrl: "https://www.credly.com/badges/...",
-  //   skills: ["SageMaker", "MLOps"],
-  // },
+  // Upload tritrix-internship.pdf (and optionally a .jpg preview) to attach the certificate itself.
+  "tritrix-internship": {
+    title: "Software Developer Internship",
+    issuer: "Tritrix Technologies, Chennai",
+    date: "2025-02",
+    skills: ["Python", "JavaScript", "HTML", "CSS", "SQL", "Code reviews"],
+  },
+  "generative-ai-imarticus": {
+    title: "Generative AI",
+    issuer: "Imarticus Learning · Skill India / NSDC",
+    date: "2025-04",
+    skills: ["Generative AI", "30-hour course"],
+  },
+  "mobile-app-development-george-academy": {
+    title: "Mobile App Development",
+    issuer: "George Academy",
+    date: "2025-01",
+    credentialId: "22619902",
+    skills: ["Mobile apps"],
+  },
+  "game-development-inlustro": {
+    title: "Game Development",
+    issuer: "InLustro",
+    date: "2024-03",
+    skills: ["Game development"],
+  },
 };
 
 /** Empty frames shown until the first certificate is added. */

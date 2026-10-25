@@ -7,6 +7,7 @@ import {
   Briefcase,
   Cloud,
   Code2,
+  Download,
   Globe,
   GraduationCap,
   Languages,
@@ -108,6 +109,15 @@ export default function AboutPage() {
               </p>
             ))}
           </div>
+          {profile.resumeUrl && (
+            <a
+              href={profile.resumeUrl}
+              download
+              className="mt-8 inline-flex h-11 items-center gap-2 rounded-full bg-fg px-5 text-sm font-medium text-bg transition-opacity hover:opacity-85"
+            >
+              <Download className="size-4" strokeWidth={2} /> Download resume (PDF)
+            </a>
+          )}
         </BlurFade>
 
         <Block title="Experience">
