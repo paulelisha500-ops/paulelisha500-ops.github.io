@@ -14,7 +14,7 @@ export const profile = {
   email: "paulelisha500@gmail.com",
   siteUrl: "https://paulelisha500-ops.github.io",
   // Drop a PDF into public/ and set this to e.g. "/resume.pdf" to show a Download Resume button.
-  resumeUrl: null as string | null,
+  resumeUrl: "/media/Elisha-Paul-Resume.pdf" as string | null,
   summary:
     "AI/ML engineer and B.Tech graduate in Computer Science Engineering (Artificial Intelligence and Machine Learning) from VELS University. I build applied AI products end to end: preparing data, training and fine-tuning models, and shipping them as apps people can use.",
   bio: [
