@@ -9,7 +9,7 @@ import { SETTINGS_KEY as KEY } from "./settings-script";
 export type ThemePref = "system" | "light" | "dark";
 export type Settings = { theme: ThemePref; ambient: boolean };
 
-const DEFAULTS: Settings = { theme: "system", ambient: true };
+const DEFAULTS: Settings = { theme: "light", ambient: true };
 const EVENT = "ep:settings";
 
 let cached: Settings | null = null;

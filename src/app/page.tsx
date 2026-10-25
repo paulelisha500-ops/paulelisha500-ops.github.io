@@ -29,10 +29,13 @@ export default function Home() {
             {profile.name}
           </p>
           <h1
-            className="reveal mt-4 text-5xl leading-[1.03] font-semibold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl"
+            className="reveal mt-4 bg-[linear-gradient(135deg,var(--fg)_45%,var(--coat-ink))] bg-clip-text text-5xl leading-[1.03] font-semibold tracking-[-0.045em] text-balance text-transparent sm:text-6xl lg:text-7xl"
             style={{ ["--d" as string]: "80ms" }}
           >
-            AI/ML engineer building <span className="text-muted">applied AI products</span>
+            AI/ML engineer building{" "}
+            <span className="bg-[linear-gradient(90deg,var(--muted),var(--coat-ink))] bg-clip-text text-transparent">
+              applied AI products
+            </span>
           </h1>
           <p
             className="reveal mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted sm:text-xl"
@@ -56,7 +59,14 @@ export default function Home() {
           </div>
         </div>
         <div className="reveal flex justify-center lg:justify-end" style={{ ["--d" as string]: "200ms" }}>
-          <PhotoStack photos={heroPhotos} />
+          <div className="relative isolate">
+            <div
+              aria-hidden
+              className="absolute top-1/2 left-1/2 -z-10 size-[140%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl"
+              style={{ background: "radial-gradient(closest-side, var(--coat-glow), transparent)" }}
+            />
+            <PhotoStack photos={heroPhotos} />
+          </div>
         </div>
       </Container>
 
