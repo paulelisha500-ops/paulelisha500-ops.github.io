@@ -19,8 +19,9 @@ function Preview({ cert, className }: { cert: Certificate; className?: string })
       )}
     >
       {src ? (
+        // object-top: portrait letters show their letterhead, not a crop of the middle
         // eslint-disable-next-line @next/next/no-img-element -- static export, previews are pre-sized WebP
-        <img src={src} alt="" loading="lazy" decoding="async" className="size-full object-cover" />
+        <img src={src} alt="" loading="lazy" decoding="async" className="size-full object-cover object-top" />
       ) : cert.pdf ? (
         <FileText className="size-8 text-muted" strokeWidth={1.4} aria-hidden />
       ) : (

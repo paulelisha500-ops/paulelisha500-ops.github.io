@@ -19,7 +19,6 @@ export type CertificateDetails = {
 };
 
 export const certificateDetails: Record<string, CertificateDetails> = {
-  // Upload tritrix-internship.pdf (and optionally a .jpg preview) to attach the certificate itself.
   "tritrix-internship": {
     title: "Software Developer Internship",
     issuer: "Tritrix Technologies, Chennai",
