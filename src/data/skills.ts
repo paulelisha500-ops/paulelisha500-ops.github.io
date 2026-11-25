@@ -10,12 +10,16 @@ import {
   siJupyter,
   siKaggle,
   siLangchain,
+  siLanggraph,
   siMongodb,
   siMysql,
+  siNeo4j,
+  siNextdotjs,
   siNumpy,
   siOpencv,
   siOpenjdk,
   siPandas,
+  siPostgresql,
   siPython,
   siPytorch,
   siReact,
@@ -31,7 +35,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Languages & data",
     icon: "code",
-    items: ["Python", "SQL", "JavaScript", "TypeScript", "Java", "NumPy", "Pandas", "scikit-learn", "Matplotlib", "MongoDB"],
+    items: ["Python", "SQL", "JavaScript", "TypeScript", "Java", "NumPy", "Pandas", "scikit-learn", "Matplotlib", "PostgreSQL", "MongoDB", "Neo4j"],
   },
   {
     title: "Deep learning & vision",
@@ -41,7 +45,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "LLMs, NLP & generative AI",
     icon: "sparkles",
-    items: ["LLMs", "RAG", "LangChain", "LlamaIndex", "Pinecone", "FAISS", "Hugging Face", "Vision-language models", "Prompt engineering"],
+    items: ["LLMs", "RAG", "LangChain", "LangGraph", "LlamaIndex", "Pinecone", "FAISS", "Hugging Face", "Transformers.js", "Vision-language models", "Prompt engineering"],
   },
   {
     title: "Deployment & MLOps",
@@ -51,7 +55,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Web",
     icon: "globe",
-    items: ["React", "HTML5", "CSS3", "Web Workers", "IndexedDB", "PWA"],
+    items: ["React", "Next.js", "HTML5", "CSS3", "Web Workers", "IndexedDB", "PWA"],
   },
 ];
 
@@ -75,6 +79,7 @@ export const stackBadges: StackBadge[] = [
   badge("NumPy", siNumpy, "#4D77CF"),
   badge("Hugging Face", siHuggingface, "#E8A90C"),
   badge("LangChain", siLangchain, "#1C3C3C"),
+  badge("LangGraph", siLanggraph, "#2F6F8F"),
   badge("FastAPI", siFastapi),
   badge("Gradio", siGradio),
   badge("Docker", siDocker),
@@ -84,10 +89,13 @@ export const stackBadges: StackBadge[] = [
   badge("GitHub", siGithub, "#24292F"),
   badge("Jupyter", siJupyter),
   badge("React", siReact, "#149ECA"),
+  badge("Next.js", siNextdotjs, "#24292F"),
   badge("TypeScript", siTypescript),
   badge("JavaScript", siJavascript, "#C9B00A"),
   badge("MongoDB", siMongodb),
   badge("MySQL", siMysql),
+  badge("PostgreSQL", siPostgresql),
+  badge("Neo4j", siNeo4j),
   badge("Java", siOpenjdk, "#E76F00"),
   badge("HTML5", siHtml5),
 ];
